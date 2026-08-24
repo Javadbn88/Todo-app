@@ -50,9 +50,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-black px-4 py-8 sm:py-12">
-      <div className="mx-auto w-full max-w-md sm:max-w-lg">
-        <h1 className="text-2xl text-white sm:text-3xl font-bold text-gray-800 text-center mb-6">
+    <div className="min-h-screen bg-gray-950 px-4 py-8">
+      <div className="mx-auto w-full max-w-md">
+        <h1 className="text-2xl text-white font-bold text-gray-800 text-center mb-6">
           Todo App
         </h1>
 
