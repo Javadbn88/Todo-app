@@ -2,11 +2,12 @@ import { useState } from "react";
 import type { Todo } from "./types/todo";
 import TodoInput from "./components/TodoInput";
 import TodoList from "./components/TodoList";
+import { Moon, Sun } from "lucide-react";
 
 function App() {
   const [todo, setTodo] = useState("");
   const [todos, setTodos] = useState<Todo[]>([]);
-
+  const [darkTheme, setDarkTheme] = useState(true);
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
 
@@ -49,14 +50,32 @@ function App() {
     );
   };
 
+
   return (
-    <div className="min-h-screen bg-gray-950 px-4 py-8">
+    <div className={`min-h-screen px-4 py-8 ${
+      darkTheme ? 'bg-gray-950' : 'bg-amber-50'
+    }`}>
+
+      <button onClick={() => setDarkTheme(!darkTheme)} className={`p-2 rounded-full ${
+        darkTheme ? 'bg-gray-800 text-white' : 'bg-gray-300 text-black'
+      }`}>
+        {darkTheme ? <Sun className="h-4 w-4"/> : <Moon className="h-4 w-4" />}
+      </button>
+
       <div className="mx-auto w-full max-w-md">
-        <h1 className="text-2xl text-white font-bold text-gray-800 text-center mb-6">
+        <h1 className={`text-2xl font-bold text-gray-800 text-center mb-6 ${
+          darkTheme ? 'text-white' : 'text-gray-800'
+        }`}>
           Todo App
         </h1>
 
-        <TodoInput value={todo} onChange={setTodo} onAdd={addTodo} />
+        <TodoInput 
+          value={todo} 
+          onChange={setTodo} 
+          onAdd={addTodo}
+          darkTheme={darkTheme}
+        />
+        
 
         <TodoList
           todos={todos}
@@ -67,6 +86,7 @@ function App() {
           onEdit={editTodo}
           onSave={saveTodo}
           onDelete={deleteTodo}
+          darkTheme={darkTheme}
         />
       </div>
     </div>
