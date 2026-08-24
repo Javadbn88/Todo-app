@@ -10,6 +10,7 @@ type TodoListProps = {
   onEdit: (index: number) => void;
   onSave: (index: number) => void;
   onDelete: (id: number) => void;
+  darkTheme: boolean;
 };
 
 function TodoList({
@@ -21,10 +22,8 @@ function TodoList({
   onEdit,
   onSave,
   onDelete,
+  darkTheme,
 }: TodoListProps) {
-  
-  
-
   return (
     <ul className="flex flex-col gap-3">
       {todos.map((item, index) => (
@@ -38,6 +37,7 @@ function TodoList({
           onEdit={() => onEdit(index)}
           onSave={() => onSave(index)}
           onDelete={() => onDelete(item.id)}
+          darkTheme={darkTheme}
         />
       ))}
     </ul>
