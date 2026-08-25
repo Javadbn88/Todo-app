@@ -5,6 +5,7 @@ import TodoList from "./components/TodoList";
 import { Moon, Sun } from "lucide-react";
 
 const STORAGE_KEY = "todos";
+const THEME_KEY = "darkTheme";
 
 function App() {
   const [todo, setTodo] = useState("");
@@ -12,14 +13,20 @@ function App() {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
   });
-  
-  const [darkTheme, setDarkTheme] = useState(true);
+  const [darkTheme, setDarkTheme] = useState<boolean>(() => {
+    const saved = localStorage.getItem(THEME_KEY);
+    return saved ? JSON.parse(saved) : true;
+  });
   const [editingIndex, setEditingIndex] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem(THEME_KEY, JSON.stringify(darkTheme));
+  }, [darkTheme]);
 
   const addTodo = () => {
     if (todo.trim() === "") return;
